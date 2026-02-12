@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./backend  
+    image: sandy-backend
+    ports:
+      - "5000:5000"
+    restart: always
+
+  frontend:
+    image: nginx:latest
+    ports:
+      - "8081:80"  # <--- Changed this!
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    restart: always
