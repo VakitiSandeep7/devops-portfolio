@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
-from flask_cors import CORS
-import psycopg2
+from flask_cors import CORS  # Import this
 import os
-import time
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 CORS(app)
