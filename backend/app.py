@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 def get_db_connection():
-    return psycopg2.connect(os.environ.get('DATABASE_URL'))
+    return flask-cors.connect(os.environ.get('DATABASE_URL'))
 
 def init_db():
     conn = get_db_connection()
