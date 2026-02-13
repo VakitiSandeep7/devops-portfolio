@@ -22,46 +22,49 @@ def get_portfolio_data():
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # Create Profile Table
-    cur.execute('CREATE TABLE IF NOT EXISTS profile (name text, role text, skills text);')
-    cur.execute('SELECT COUNT(*) FROM profile;')
-    if cur.fetchone()[0] == 0:
-        cur.execute("INSERT INTO profile (name, role, skills) VALUES (%s, %s, %s)",
-                    ("Sandeep Vakiti", "DevOps Engineer", "Docker, Python, Flask, Linux, PostgreSQL"))
+    # --- START OF UPDATE ---
+    # 1. Temporary Cleanup (Run this ONCE, then delete this line later)
+    cur.execute('DROP TABLE IF EXISTS projects;') 
 
-    # Create Projects Table
-    cur.execute('CREATE TABLE IF NOT EXISTS projects (title text, description text, details text, tech_stack text);')
+    # 2. Create Projects Table with NEW columns
+    cur.execute('''CREATE TABLE IF NOT EXISTS projects (
+        title text, 
+        description text, 
+        details text, 
+        tech_stack text
+    );''')
+
+    # 3. Insert the detailed data
     cur.execute('SELECT COUNT(*) FROM projects;')
     if cur.fetchone()[0] == 0:
         cur.execute("INSERT INTO projects (title, description, details, tech_stack) VALUES (%s, %s, %s, %s)",
-        ("Multi-Container Portfolio", 
-        "A 3-tier architecture app using Docker Compose and Postgres.",
-        "Managed multi-service orchestration with Docker and automated internal networking between Flask and PostgreSQL.",
-        "Docker, Docker-Compose, PostgreSQL"))
+            ("Multi-Container Portfolio", 
+             "A 3-tier architecture app using Docker Compose and Postgres.",
+             "Managed multi-service orchestration with Docker and automated internal networking between Flask and PostgreSQL.",
+             "Docker, Docker-Compose, PostgreSQL"))
 
         cur.execute("INSERT INTO projects (title, description, details, tech_stack) VALUES (%s, %s, %s, %s)",
-        ("CI/CD Pipeline", 
-        "Automated deployment workflow using GitHub Actions.",
-        "Designed a workflow that triggers on every push, runs linting, and automatically deploys the latest build to Render.",
-        "GitHub Actions, YAML, Render API"))
+            ("CI/CD Pipeline", 
+             "Automated deployment workflow using GitHub Actions.",
+             "Designed a workflow that triggers on every push, runs linting, and automatically deploys the latest build to Render.",
+             "GitHub Actions, YAML, Render API"))
+    # --- END OF UPDATE ---
 
-    conn.commit()
-
-    # Fetch Data
-    cur.execute('SELECT name, role, skills FROM profile LIMIT 1;')
-    p = cur.fetchone()
-
+    # Make sure to fetch ALL columns now
     cur.execute('SELECT title, description, details, tech_stack FROM projects;')
     rows = cur.fetchall()
+
+    # Update this list to include the new fields
     proj_list = [{"title": r[0], "description": r[1], "details": r[2], "tech_stack": r[3]} for r in rows]
 
+    # ... keep your profile table logic below ...
+    conn.commit()
     cur.close()
     conn.close()
 
     return jsonify({
-        "name": p[0],
-        "role": p[1],
-        "skills": p[2].split(", "),
+        "name": "Sandeep Vakiti",
+        "role": "DevOps Engineer",
         "projects": proj_list,
         "status": "Live from Database"
     })
