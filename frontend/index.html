@@ -56,55 +56,89 @@
             <div class="status-dot"></div>
         </div>
         <h3 class="fw-bold mb-1">Sandeep Vakiti</h3>
-        <p style="color: var(--maroon-light); font-size: 0.9rem; font-weight: 600;">DevOps & Cloud Engineer</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandeep Vakiti | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { 
+            --bg: #050505; --card: #0d0d0d; --maroon: #800000; 
+            --maroon-light: #a52a2a; --border: #1a1a1a; --text-main: #ffffff;
+        }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; }
+        .dashboard-wrapper { display: grid; grid-template-columns: 320px 1fr; gap: 25px; padding: 30px; max-width: 1400px; margin: auto; }
         
-        <div class="text-start mt-4 px-2">
-            <p class="small text-secondary mb-2"><i class="fas fa-map-marker-alt me-2"></i> Mahabubnagar, TS</p>
-            <p class="small text-secondary mb-2"><i class="fas fa-phone me-2"></i> +91 9966969396</p>
-            <p class="small text-secondary"><i class="fas fa-envelope me-2"></i> vakitisandeep@gmail.com</p>
+        .sidebar { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 25px; height: fit-content; position: sticky; top: 30px; border-top: 4px solid var(--maroon); }
+        .profile-container { width: 150px; height: 150px; margin: 0 auto 20px; border-radius: 50%; padding: 4px; background: linear-gradient(45deg, var(--maroon), #330000); position: relative; }
+        .profile-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--card); }
+        .status-dot { position: absolute; bottom: 12px; right: 12px; width: 18px; height: 18px; background: #238636; border-radius: 50%; border: 3px solid var(--card); box-shadow: 0 0 15px #238636; }
+        
+        .bento-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 25px; transition: 0.3s; }
+        .bento-card:hover { border-color: var(--maroon); transform: translateY(-3px); }
+        .section-title { color: var(--maroon-light); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border-left: 3px solid var(--maroon); padding-left: 10px; margin-bottom: 20px; }
+        .skill-tag { background: #1a0000; border: 1px solid #4d0000; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; margin: 3px; display: inline-block; color: #ffcccc; }
+        
+        .project-item { border-bottom: 1px solid #1a1a1a; padding: 15px 0; cursor: pointer; }
+        .project-details { max-height: 0; opacity: 0; overflow: hidden; transition: 0.4s ease; color: #b0b0b0; }
+        .project-item.active .project-details { max-height: 400px; opacity: 1; margin-top: 10px; }
+        .btn-maroon { background: var(--maroon); color: white; font-weight: bold; border-radius: 8px; width: 100%; margin-top: 20px; text-decoration: none; display: block; padding: 12px; text-align: center; }
+
+        @media (max-width: 992px) { .dashboard-wrapper { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <aside class="sidebar text-center">
+        <div class="profile-container">
+            <img src="https://i.ibb.co/7dnbG8Zm/1722801017149.jpg" alt="Sandeep Vakiti">
+            <div class="status-dot"></div>
+        </div>
+        <h3 class="fw-bold mb-1">Sandeep Vakiti</h3>
+        <p style="color: var(--maroon-light); font-weight: 600;">DevOps & Cloud Engineer</p>
+        
+        <div class="text-start mt-4 small text-secondary">
+            <p class="mb-2"><i class="fas fa-map-marker-alt me-2 text-white"></i> Mahabubnagar, TS</p>
+            <p class="mb-2"><i class="fas fa-phone me-2 text-white"></i> +91 9966969396</p>
+            <p class="mb-2"><i class="fas fa-envelope me-2 text-white"></i> vakitisandeep9966@gmail.com</p>
         </div>
 
         <div class="d-flex justify-content-center gap-3 my-4">
-            <a href="#" class="text-white"><i class="fab fa-github fa-lg"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="https://github.com/VakitiSandeep" target="_blank" class="text-white"><i class="fab fa-github fa-lg"></i></a>
+            <a href="https://linkedin.com/in/sandeepvakiti" target="_blank" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
         </div>
 
-        <a href="#" class="btn btn-maroon">GET RESUME</a>
+        <a href="https://drive.google.com/file/d/1d9g7r3vt6B3sInAAdFliVmOGDXu8mtvO/view?usp=drive_link" target="_blank" class="btn btn-maroon">VIEW CV</a>
     </aside>
 
     <main>
         <div class="row g-3">
             <div class="col-12">
                 <div class="bento-card">
-                    <div class="section-title">Technical Deployments</div>
-                    <div id="projects-container">
-                        <div class="spinner-border text-danger"></div>
-                    </div>
+                    <div class="section-title">Infrastructure Projects</div>
+                    <div id="projects-container"><div class="spinner-border text-danger"></div></div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="bento-card h-100">
-                    <div class="section-title">Core Stack</div>
-                    <p class="small text-secondary mb-2">INFRASTRUCTURE</p>
-                    <span class="skill-tag">AWS</span> <span class="skill-tag">Docker</span> <span class="skill-tag">Kubernetes</span> 
-                    <span class="skill-tag">Terraform</span> <span class="skill-tag">Jenkins</span>
-                    <p class="small text-secondary mt-3 mb-2">DEVELOPMENT</p>
-                    <span class="skill-tag">Python</span> <span class="skill-tag">Java</span> <span class="skill-tag">Django</span> <span class="skill-tag">MySQL</span>
+                    <div class="section-title">Technical Stack</div>
+                    <span class="skill-tag">AWS</span> <span class="skill-tag">Docker</span> 
+                    <span class="skill-tag">Kubernetes</span> <span class="skill-tag">Jenkins</span>
+                    <span class="skill-tag">Python</span> <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">Linux</span> <span class="skill-tag">MySQL</span>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="bento-card h-100">
-                    <div class="section-title">Academic History</div>
-                    <div class="mb-3">
-                        <p class="mb-0 fw-bold">B.Tech CSE (2019-2023)</p>
-                        <p class="small text-secondary mb-0">Annamacharya Institute | CGPA: 6.46</p>
-                    </div>
-                    <div>
-                        <p class="mb-0 fw-bold">Intermediate MPC (2017-2019)</p>
-                        <p class="small text-secondary mb-0">Vagdevi Junior College | 80%</p>
-                    </div>
+                    <div class="section-title">Education</div>
+                    <p class="mb-1 fw-bold">B.Tech CSE (6.46 CGPA)</p>
+                    <p class="small text-secondary mb-3">Annamacharya Institute | 2023</p>
+                    <p class="mb-1 fw-bold">Intermediate MPC (80%)</p>
+                    <p class="small text-secondary">Vagdevi Junior College | 2019</p>
                 </div>
             </div>
         </div>
@@ -113,35 +147,30 @@
 
 <script>
     const API_URL = "https://portfolio-backend-2vst.onrender.com";
-
     async function fetchData() {
         try {
             const res = await fetch(API_URL);
             const data = await res.json();
             const container = document.getElementById('projects-container');
             container.innerHTML = '';
-
             data.projects.forEach(p => {
                 container.innerHTML += `
                     <div class="project-item" onclick="this.classList.toggle('active')">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="fw-bold mb-1 text-white">${p.title}</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6 class="fw-bold mb-0 text-white">${p.title}</h6>
                             <i class="fas fa-plus small text-secondary"></i>
                         </div>
-                        <p class="text-secondary small mb-0">${p.description}</p>
                         <div class="project-details">
-                            <div class="p-3 mt-2 rounded bg-black border border-dark">
+                            <div class="p-3 bg-black border border-dark rounded">
                                 <p class="small mb-2">${p.details}</p>
                                 <p class="small mb-0" style="color:var(--maroon-light)"><strong>Stack:</strong> ${p.tech_stack}</p>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
-        } catch (e) { container.innerHTML = "Backend connection offline."; }
+        } catch (e) { document.getElementById('projects-container').innerHTML = "API Connection Error."; }
     }
     fetchData();
 </script>
-
 </body>
 </html>
