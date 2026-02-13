@@ -3,121 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandeep Vakiti | DevOps Portfolio</title>
+    <title>Sandeep Vakiti | DevOps Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-    body { background-color: #0d1117; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    .project-card {
-        background: #161b22;
-        border: 1px solid #30363d;
-        border-radius: 12px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-    /* Hover Effect */
-    .project-card:hover {
-        transform: translateY(-8px);
-        border-color: #58a6ff;
-        box-shadow: 0 10px 30px rgba(88, 166, 255, 0.2);
-    }
-    /* The Hidden Content */
-    .details-content {
-        max-height: 0;
-        opacity: 0;
-        transition: all 0.5s ease;
-        font-size: 0.9rem;
-        color: #8b949e;
-    }
-    /* When Clicked (Active) */
-    .project-card.active {
-        border-color: #238636;
-        background: #1c2128;
-    }
-    .project-card.active .details-content {
-        max-height: 300px;
-        opacity: 1;
-        margin-top: 15px;
-        padding-top: 15px;
-        border-top: 1px solid #30363d;
-    }
-    .tech-pill {
-        display: inline-block;
-        background: #238636;
-        color: white;
-        padding: 2px 8px;
-        border-radius: 10px;
-        font-size: 0.75rem;
-        margin-right: 5px;
-        margin-top: 5px;
-    }
+        :root { --bg: #050505; --card: #0f0f0f; --accent: #00d4ff; --border: #222; }
+        body { background: var(--bg); color: #e0e0e0; font-family: 'Inter', system-ui, sans-serif; }
+        
+        .dashboard-wrapper { display: grid; grid-template-columns: 300px 1fr; gap: 25px; padding: 30px; max-width: 1400px; margin: auto; }
+        
+        /* Sidebar */
+        .sidebar { background: var(--card); border: 1px solid var(--border); border-radius: 30px; padding: 40px 25px; height: fit-content; position: sticky; top: 30px; }
+        .profile-container { width: 140px; height: 140px; margin: 0 auto 20px; border-radius: 50%; padding: 4px; background: linear-gradient(45deg, var(--accent), #238636); position: relative; }
+        .profile-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--card); }
+        .status-dot { position: absolute; bottom: 10px; right: 10px; width: 16px; height: 16px; background: #238636; border-radius: 50%; border: 3px solid var(--card); box-shadow: 0 0 10px #238636; }
+        
+        /* Bento Cards */
+        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .bento-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 25px; transition: 0.3s ease; }
+        .bento-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        
+        .skill-tag { background: #1a1a1a; border: 1px solid #333; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; margin: 4px; display: inline-block; color: var(--accent); }
+        
+        /* Project Interactive List */
+        .project-item { border-bottom: 1px solid #222; padding: 15px 0; cursor: pointer; }
+        .project-details { max-height: 0; opacity: 0; overflow: hidden; transition: 0.4s ease; color: #888; font-size: 0.9rem; }
+        .project-item.active .project-details { max-height: 200px; opacity: 1; margin-top: 10px; }
+        
+        .btn-resume { background: var(--accent); color: black; font-weight: bold; border-radius: 12px; transition: 0.3s; width: 100%; margin-top: 20px; }
+        .btn-resume:hover { background: #fff; transform: scale(1.05); }
+
+        @media (max-width: 992px) { .dashboard-wrapper { grid-template-columns: 1fr; } .sidebar { position: relative; top: 0; } }
     </style>
 </head>
 <body>
 
-<section class="hero text-center">
-    <div class="container">
-        <h1 id="name" class="display-3">Loading...</h1>
-        <p id="role" class="lead text-info mb-4 fs-4"></p>
-        <div id="skills-container" class="mt-4"></div>
-    </div>
-</section>
+<div class="dashboard-wrapper">
+    <aside class="sidebar text-center">
+        <div class="profile-container">
+            <img src="https://i.ibb.co/7dnbG8Zm/1722801017149.jpg" alt="Sandeep Vakiti">
+            <div class="status-dot"></div>
+        </div>
+        <h3 class="fw-bold mt-3 mb-1">Sandeep Vakiti</h3>
+        <p class="text-secondary small">DevOps & Cloud Engineer</p>
+        
+        <div class="d-flex justify-content-center gap-3 my-4">
+            <a href="https://github.com/your-username" class="text-white"><i class="fab fa-github fa-lg"></i></a>
+            <a href="https://linkedin.com/in/your-username" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="mailto:vakitisandeep9966@gmail.com" class="text-white"><i class="fas fa-envelope fa-lg"></i></a>
+        </div>
 
-<main class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Active Projects</h2>
-        <span id="status" class="status-pill">System Booting...</span>
-    </div>
-    <div id="projects-container" class="row g-4"></div>
-</main>
+        <p class="small text-start px-2 text-secondary">Motivated B.Tech graduate specializing in AWS, Docker, and CI/CD automation.</p>
+        <a href="#" class="btn btn-resume">Download Resume</a>
+    </aside>
 
-<footer class="text-center py-5 text-muted border-top border-secondary">
-    <p>&copy; 2026 Sandeep Vakiti | Deployed via Render</p>
-</footer>
+    <main>
+        <div class="bento-grid">
+            <div class="bento-card col-md-12" style="grid-column: span 2;">
+                <h4 class="text-info mb-4"><i class="fas fa-layer-group me-2"></i> Active Infrastructure (Projects)</h4>
+                <div id="projects-container">
+                    <p class="text-secondary">Connecting to Backend API...</p>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <h4 class="text-info mb-3"><i class="fas fa-code me-2"></i> Technical Stack</h4>
+                <div id="skills-cloud">
+                    <span class="skill-tag">AWS (EC2, S3, IAM)</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Jenkins</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">CI/CD</span>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <h4 class="text-info mb-3"><i class="fas fa-graduation-cap me-2"></i> Education</h4>
+                <p class="mb-1 fw-bold">B.Tech in Computer Science</p>
+                <p class="small text-secondary mb-0">Annamacharya Institute (2019-2023)</p>
+                <hr style="border-color: #333;">
+                <p class="mb-1 fw-bold">AWS & DevOps Training</p>
+                <p class="small text-secondary">Brain O Vision / Online Certification</p>
+            </div>
+        </div>
+    </main>
+</div>
 
 <script>
-    // 🚨 REPLACE THE URL BELOW WITH YOUR ACTUAL RENDER BACKEND URL 🚨
-    const API_URL = "https://portfolio-backend-2vst.onrender.com"; 
+    const API_URL = "https://portfolio-backend-2vst.onrender.com";
 
     async function fetchData() {
-    try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        
-        document.getElementById('name').innerText = data.name;
-        document.getElementById('role').innerText = data.role;
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            
+            const container = document.getElementById('projects-container');
+            container.innerHTML = '';
 
-        const projBox = document.getElementById('projects-container');
-        projBox.innerHTML = ''; 
-
-        data.projects.forEach(p => {
-            // Split tech stack string into pills
-            const pills = p.tech_stack ? p.tech_stack.split(',').map(tech => `<span class="tech-pill">${tech.trim()}</span>`).join('') : '';
-
-            projBox.innerHTML += `
-                <div class="col-md-6 mb-4">
-                    <div class="project-card p-4" onclick="this.classList.toggle('active')">
-                        <h4 class="text-info fw-bold mb-1">${p.title}</h4>
-                        <p class="text-white-50 small mb-0">${p.description}</p>
-                        
-                        <div class="details-content">
-                            <p class="mb-2">${p.details}</p>
-                            <div class="mt-2">
-                                <strong>Stack:</strong><br>${pills}
-                            </div>
+            data.projects.forEach(p => {
+                container.innerHTML += `
+                    <div class="project-item" onclick="this.classList.toggle('active')">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">${p.title}</h5>
+                            <i class="fas fa-chevron-down small text-secondary"></i>
                         </div>
-                        <div class="text-center mt-2">
-                             <small style="color: #30363d;">(Click to expand)</small>
+                        <p class="text-secondary small mb-0">${p.description}</p>
+                        <div class="project-details">
+                            <p class="mt-2">${p.details}</p>
+                            <p class="text-info small"><strong>Stack:</strong> ${p.tech_stack}</p>
                         </div>
                     </div>
-                </div>`;
-        });
-    } catch (e) { console.log(e); }
-}
-
+                `;
+            });
+        } catch (err) {
+            console.error("API Error:", err);
+        }
+    }
     fetchData();
 </script>
+
 </body>
 </html>
