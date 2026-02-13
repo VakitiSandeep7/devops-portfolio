@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
-from flask_cors import CORS  # Import this
+from flask_cors import CORS
 import os
+import time
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
@@ -20,14 +21,14 @@ def get_db_connection():
 def get_portfolio_data():
     conn = get_db_connection()
     cur = conn.cursor()
-    
+
     # Create Profile Table
     cur.execute('CREATE TABLE IF NOT EXISTS profile (name text, role text, skills text);')
     cur.execute('SELECT COUNT(*) FROM profile;')
     if cur.fetchone()[0] == 0:
         cur.execute("INSERT INTO profile (name, role, skills) VALUES (%s, %s, %s)",
                     ("Sandeep Vakiti", "DevOps Engineer", "Docker, Python, Flask, Linux, PostgreSQL"))
-    
+
     # Create Projects Table
     cur.execute('CREATE TABLE IF NOT EXISTS projects (title text, description text);')
     cur.execute('SELECT COUNT(*) FROM projects;')
@@ -36,17 +37,17 @@ def get_portfolio_data():
                     ("Multi-Container Portfolio", "A 3-tier architecture app using Docker Compose and Postgres."))
         cur.execute("INSERT INTO projects (title, description) VALUES (%s, %s)", 
                     ("CI/CD Pipeline", "Automated deployment workflow using GitHub Actions."))
-    
+
     conn.commit()
 
     # Fetch Data
     cur.execute('SELECT name, role, skills FROM profile LIMIT 1;')
     p = cur.fetchone()
-    
+
     cur.execute('SELECT title, description FROM projects;')
     rows = cur.fetchall()
     proj_list = [{"title": r[0], "description": r[1]} for r in rows]
-    
+
     cur.close()
     conn.close()
 
