@@ -30,13 +30,20 @@ def get_portfolio_data():
                     ("Sandeep Vakiti", "DevOps Engineer", "Docker, Python, Flask, Linux, PostgreSQL"))
 
     # Create Projects Table
-    cur.execute('CREATE TABLE IF NOT EXISTS projects (title text, description text);')
+    cur.execute('CREATE TABLE IF NOT EXISTS projects (title text, description text, details text, tech_stack text);')
     cur.execute('SELECT COUNT(*) FROM projects;')
     if cur.fetchone()[0] == 0:
-        cur.execute("INSERT INTO projects (title, description) VALUES (%s, %s)", 
-                    ("Multi-Container Portfolio", "A 3-tier architecture app using Docker Compose and Postgres."))
-        cur.execute("INSERT INTO projects (title, description) VALUES (%s, %s)", 
-                    ("CI/CD Pipeline", "Automated deployment workflow using GitHub Actions."))
+        cur.execute("INSERT INTO projects (title, description, details, tech_stack) VALUES (%s, %s, %s, %s)",
+        ("Multi-Container Portfolio", 
+        "A 3-tier architecture app using Docker Compose and Postgres.",
+        "Managed multi-service orchestration with Docker and automated internal networking between Flask and PostgreSQL.",
+        "Docker, Docker-Compose, PostgreSQL"))
+
+        cur.execute("INSERT INTO projects (title, description, details, tech_stack) VALUES (%s, %s, %s, %s)",
+        ("CI/CD Pipeline", 
+        "Automated deployment workflow using GitHub Actions.",
+        "Designed a workflow that triggers on every push, runs linting, and automatically deploys the latest build to Render.",
+        "GitHub Actions, YAML, Render API"))
 
     conn.commit()
 
@@ -44,9 +51,9 @@ def get_portfolio_data():
     cur.execute('SELECT name, role, skills FROM profile LIMIT 1;')
     p = cur.fetchone()
 
-    cur.execute('SELECT title, description FROM projects;')
+    cur.execute('SELECT title, description, details, tech_stack FROM projects;')
     rows = cur.fetchall()
-    proj_list = [{"title": r[0], "description": r[1]} for r in rows]
+    proj_list = [{"title": r[0], "description": r[1], "details": r[2], "tech_stack": r[3]} for r in rows]
 
     cur.close()
     conn.close()
