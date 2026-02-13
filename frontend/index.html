@@ -13,54 +13,12 @@
             --text-main: #f8fafc;
             --accent-blue: #38bdf8;
         }
-
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .hero { 
-            background: radial-gradient(circle at top right, #1e293b, #0f172a);
-            padding: 100px 0 60px 0; 
-            border-bottom: 1px solid #334155;
-        }
-
-        h1 { font-weight: 800; letter-spacing: -1px; }
-
-        .skill-badge {
-            background-color: var(--accent-blue);
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: bold;
-            margin: 5px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
-        }
-
-        .status-pill {
-            background: #064e3b;
-            color: #4ade80;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; }
+        .hero { background: radial-gradient(circle at top right, #1e293b, #0f172a); padding: 100px 0 60px 0; border-bottom: 1px solid #334155; }
+        .skill-badge { background-color: var(--accent-blue); color: #0f172a; font-family: 'JetBrains Mono', monospace; font-weight: bold; margin: 5px; padding: 8px 16px; border-radius: 8px; display: inline-block; }
+        .project-card { background-color: var(--card-bg); border: 1px solid #334155; border-radius: 12px; transition: all 0.3s ease; height: 100%; }
+        .project-card:hover { transform: translateY(-8px); border-color: var(--accent-blue); box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3); }
+        .status-pill { background: #064e3b; color: #4ade80; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
     </style>
 </head>
 <body>
@@ -76,29 +34,28 @@
 <main class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">Active Projects</h2>
-        <span id="status" class="status-pill">Checking System...</span>
+        <span id="status" class="status-pill">System Booting...</span>
     </div>
-
-    <div id="projects-container" class="row g-4">
-        </div>
+    <div id="projects-container" class="row g-4"></div>
 </main>
 
 <footer class="text-center py-5 text-muted border-top border-secondary">
-    <p>&copy; 2026 Sandeep Vakiti | Built with Docker, Flask & Postgres</p>
+    <p>&copy; 2026 Sandeep Vakiti | Deployed via Render</p>
 </footer>
 
 <script>
+    postgresql://portfolio_db_0a87_user:K4NPTzXODCXV5hmD6vJ2F9BfLpjrFUDZ@dpg-d67f64p4tr6s739amt50-a/portfolio_db_0a87
+    const API_URL = "https://your-backend-name.onrender.com"; 
+
     async function fetchData() {
         try {
-            const response = await fetch('http://localhost:5000/');
+            const response = await fetch(API_URL);
             const data = await response.json();
             
-            // Populate Name & Role
             document.getElementById('name').innerText = data.name;
             document.getElementById('role').innerText = data.role;
             document.getElementById('status').innerText = data.status;
 
-            // Populate Skills
             const skillsBox = document.getElementById('skills-container');
             data.skills.forEach(skill => {
                 const span = document.createElement('span');
@@ -107,7 +64,6 @@
                 skillsBox.appendChild(span);
             });
 
-            // Populate Projects
             const projBox = document.getElementById('projects-container');
             data.projects.forEach(p => {
                 projBox.innerHTML += `
@@ -116,23 +72,21 @@
                             <h4 class="text-info fw-bold mb-3">${p.title}</h4>
                             <p class="text-secondary">${p.description}</p>
                             <div class="mt-3">
-                                <span class="badge border border-info text-info">Deployed</span>
+                                <span class="badge border border-info text-info">Live on Cloud</span>
                             </div>
                         </div>
                     </div>`;
             });
 
         } catch (error) {
-            document.getElementById('name').innerText = "System Offline";
-            document.getElementById('status').innerText = "Connection Failed";
-            document.getElementById('status').style.background = "#7f1d1d";
-            document.getElementById('status').style.color = "#fca5a5";
+            document.getElementById('name').innerText = "API Connecting...";
+            document.getElementById('status').innerText = "Waking up Server...";
             console.error("Error fetching data:", error);
+            // Retry after 5 seconds if server is sleeping (Render free tier feature)
+            setTimeout(fetchData, 5000);
         }
     }
-
     fetchData();
 </script>
-
 </body>
 </html>
