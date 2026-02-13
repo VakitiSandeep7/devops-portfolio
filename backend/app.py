@@ -1,19 +1,62 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+import psycopg2
+import os
+import time
 
 app = Flask(__name__)
 CORS(app)
 
+def get_db_connection():
+    while True:
+        try:
+            conn = psycopg2.connect(os.environ['DATABASE_URL'])
+            return conn
+        except Exception as e:
+            print(f"Database not ready... {e}")
+            time.sleep(2)
+
 @app.route('/')
 def get_portfolio_data():
-    # This mimics data coming from a database
-    data = {
-        "name": "Sandeep Vakiti",
-        "role": "DevOps Engineer",
-        "skills": ["Docker", "Python", "Flask", "Linux", "WSL2", "Nginx"],
-        "status": "Online"
-    }
-    return jsonify(data)
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Create Profile Table
+    cur.execute('CREATE TABLE IF NOT EXISTS profile (name text, role text, skills text);')
+    cur.execute('SELECT COUNT(*) FROM profile;')
+    if cur.fetchone()[0] == 0:
+        cur.execute("INSERT INTO profile (name, role, skills) VALUES (%s, %s, %s)",
+                    ("Sandeep Vakiti", "DevOps Engineer", "Docker, Python, Flask, Linux, PostgreSQL"))
+    
+    # Create Projects Table
+    cur.execute('CREATE TABLE IF NOT EXISTS projects (title text, description text);')
+    cur.execute('SELECT COUNT(*) FROM projects;')
+    if cur.fetchone()[0] == 0:
+        cur.execute("INSERT INTO projects (title, description) VALUES (%s, %s)", 
+                    ("Multi-Container Portfolio", "A 3-tier architecture app using Docker Compose and Postgres."))
+        cur.execute("INSERT INTO projects (title, description) VALUES (%s, %s)", 
+                    ("CI/CD Pipeline", "Automated deployment workflow using GitHub Actions."))
+    
+    conn.commit()
+
+    # Fetch Data
+    cur.execute('SELECT name, role, skills FROM profile LIMIT 1;')
+    p = cur.fetchone()
+    
+    cur.execute('SELECT title, description FROM projects;')
+    rows = cur.fetchall()
+    proj_list = [{"title": r[0], "description": r[1]} for r in rows]
+    
+    cur.close()
+    conn.close()
+
+    return jsonify({
+        "name": p[0],
+        "role": p[1],
+        "skills": p[2].split(", "),
+        "projects": proj_list,
+        "status": "Live from Database"
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

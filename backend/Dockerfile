@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Re-run install with a clean slate
-RUN pip install --no-cache-dir flask flask-cors
+RUN pip install --no-cache-dir flask flask-cors psycopg2-binary
 
 COPY app.py .
 
