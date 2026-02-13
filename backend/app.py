@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 def get_db_connection():
-    return requirements.txt.connect(os.environ.get('DATABASE_URL'))
+    return psycopg2.connect(os.environ.get('DATABASE_URL'))
 
 def init_db():
     conn = get_db_connection()
@@ -63,4 +63,4 @@ def get_portfolio_data():
         "projects": proj_list
     })
 
-if __name__ == '__main__':
+if __name__ == '__main__' :
