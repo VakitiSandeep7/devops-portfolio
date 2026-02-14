@@ -3,254 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandeep Vakiti | DevOps & Cloud Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Sandeep Vakiti | DevOps Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020617;
-            --card: #0f172a;
-            --accent: #22d3ee;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --border: #1e293b;
+            --glass: rgba(255, 255, 255, 0.7);
+            --gold: #d4af37;
+            --gold-light: #f1e5ac;
+            --text-dark: #1e293b;
+            --text-muted: #475569;
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg); 
-            color: var(--text-main); 
-            margin: 0; 
-            line-height: 1.6;
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
         }
 
-        /* --- HERO SECTION --- */
-        header {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #083344 0%, var(--bg) 80%);
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
         }
 
-        .profile-container {
+        /* --- GLASS CARDS --- */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 24px;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            padding: 30px;
             position: relative;
-            width: 180px;
-            height: 180px;
-            margin-bottom: 30px;
+            overflow: hidden;
         }
 
-        .profile-img {
+        /* The Golden Ending/Border effect */
+        .glass-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        /* --- SIDEBAR & PHOTO --- */
+        .sidebar { height: fit-content; position: sticky; top: 40px; text-align: center; }
+        
+        .photo-circle {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .photo-circle img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--accent);
-            box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
-            background: var(--card);
+            background: white;
+            border: 3px solid white;
         }
 
-        .profile-container::after {
-            content: '';
-            position: absolute;
-            top: -10px; left: -10px; right: -10px; bottom: -10px;
-            border-radius: 50%;
-            border: 2px solid rgba(34, 211, 238, 0.2);
-            animation: pulse 2s infinite;
+        /* --- TYPOGRAPHY --- */
+        h1 { font-size: 2rem; margin: 10px 0; color: #0f172a; font-weight: 800; }
+        h2 { font-size: 1.3rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-top: 0; }
+        .hero-subtitle { color: #3b82f6; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
+
+        /* --- GRID CONTENT --- */
+        .content-area { display: flex; flex-direction: column; gap: 30px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .skill-tag {
+            display: inline-block;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin: 4px;
+            border: 1px solid #e2e8f0;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.15); opacity: 0; }
-        }
-
-        h1 { font-size: 3.5rem; margin: 0; letter-spacing: -2px; }
-        .hero-subtitle { color: var(--accent); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-        .hero-desc { color: var(--text-dim); max-width: 700px; font-size: 1.1rem; margin-top: 20px; }
-
-        /* --- LAYOUT --- */
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-        section { margin-bottom: 80px; }
-        h2 { font-size: 1.8rem; border-left: 4px solid var(--accent); padding-left: 15px; margin-bottom: 30px; }
-
-        /* --- SKILLS GRID --- */
-        .skills-category { margin-bottom: 30px; }
-        .skills-category h4 { color: var(--accent); margin-bottom: 15px; text-transform: uppercase; font-size: 0.8rem; }
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-        }
-        .skill-box {
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
+        /* --- ACTION BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
             font-size: 0.9rem;
             transition: 0.3s;
+            margin: 5px;
         }
-        .skill-box:hover { border-color: var(--accent); background: #083344; transform: translateY(-3px); }
+        .btn-gold { background: var(--gold); color: white; border: none; }
+        .btn-outline { border: 1.5px solid #cbd5e1; color: var(--text-muted); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        /* --- PROJECT CARDS --- */
-        .project-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 25px;
-            transition: 0.3s;
-        }
-        .project-card:hover { border-color: #334155; box-shadow: 0 15px 30px -15px rgba(0,0,0,0.6); }
-        .project-date { color: var(--accent); font-size: 0.85rem; font-weight: bold; }
-        .tech-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tech-pill { background: #1e293b; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; border: 1px solid var(--border); }
-
-        /* --- EDUCATION & CORE --- */
-        .edu-item { margin-bottom: 20px; padding-left: 10px; }
-        .edu-item h3 { margin: 0; font-size: 1.1rem; }
-        .edu-item p { margin: 5px 0; color: var(--text-dim); }
-
-        /* --- BUTTONS --- */
-        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
-        .btn { text-decoration: none; padding: 12px 28px; border-radius: 50px; font-weight: 600; transition: 0.3s; }
-        .btn-primary { background: var(--accent); color: var(--bg); }
-        .btn-secondary { border: 1px solid var(--border); color: var(--text-main); }
-        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .project-card { padding: 25px; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; }
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="profile-container">
-            <img src="https://i.ibb.co/DDc5PHdw/1722801017149.jpg" alt="1722801017149" border="0">
-        </div>
-        <div class="hero-subtitle">DevOps & Cloud Engineer</div>
-        <h1>Sandeep Vakiti</h1>
-        <p class="hero-desc">
-            Motivated B.Tech graduate with a strong foundation in Python, Java, and automation. 
-            Currently architecting CI/CD pipelines and cloud infrastructure using AWS, Docker, and Kubernetes.
-        </p>
-        <div class="btn-group">
-            <a href="https://github.com/VakitiSandeep7" target="_blank" class="btn btn-secondary">GitHub</a>
-            <a href="mailto:vakitisandeep9966@gmail.com" class="btn btn-secondary">Email</a>
-            <a href="https://www.linkedin.com/in/sandeepvakiti" target="_blank" class="btn btn-secondary">Linkedin</a>
-            <a href="https://drive.google.com/file/d/1d9g7r3vt6B3sInAAdFliVmOGDXu8mtvO/view?usp=drive_link" class="btn btn-primary">Download Resume</a>
-        </div>
-    </header>
-
-    <div class="container">
-        
-        <section>
-            <h2>Professional Summary</h2>
-            <p style="color: var(--text-dim);">
-                Seeking entry-level opportunities in DevOps Engineering or Software Development. 
-                Quick learner with demonstrated ability in automation, requirement gathering, and quality assurance. 
-                Passionate about optimizing deployment workflows and cloud scalability.
-            </p>
-        </section>
-
-        <section>
-            <h2>Technical Skills</h2>
+    <div class="main-wrapper">
+        <aside class="sidebar glass-card">
+            <div class="photo-circle">
+                <img src="https://i.ibb.co/YJ6TH4g/1635841318532-1.jpg" alt="1635841318532-1" border="0" alt="Sandeep Vakiti">
+            </div>
+            <div class="hero-subtitle">DevOps & Cloud Engineer</div>
+            <h1>Sandeep Vakiti</h1>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">B.Tech Computer Science Graduate | Cloud Architect</p>
             
-            <div class="skills-category">
-                <h4>Cloud & DevOps</h4>
-                <div class="skills-grid">
-                    <div class="skill-box">AWS (EC2, S3, IAM)</div>
-                    <div class="skill-box">Docker</div>
-                    <div class="skill-box">Kubernetes</div>
-                    <div class="skill-box">Jenkins (CI/CD)</div>
-                    <div class="skill-box">Terraform (IaC)</div>
-                    <div class="skill-box">Linux/Shell</div>
-                </div>
+            <div style="margin-top: 25px;">
+                <a href="vakitisandeep9966@gmail.com" class="btn btn-gold">Email Me</a>
+                <a href="https://github.com/VakitiSandeep7" target="_blank" class="btn btn-outline">GitHub</a>
+                <a href="https://www.linkedin.com/in/sandeepvakiti" target="_blank" class="btn btn-outline">LinkedIn</a>
             </div>
+        </aside>
 
-            <div class="skills-category">
-                <h4>Programming & Testing</h4>
-                <div class="skills-grid">
-                    <div class="skill-box">Python</div>
-                    <div class="skill-box">Java / J2EE</div>
-                    <div class="skill-box">HTML/CSS/JS</div>
-                    <div class="skill-box">MySQL</div>
-                    <div class="skill-box">Manual Testing</div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Academic Projects</h2>
+        <main class="content-area">
             
-            <div class="project-card">
-                <div class="project-date">2023 | CAPSTONE</div>
-                <h3>Modelling and Predicting Cyber Hacking Breaches</h3>
-                <p style="color: var(--text-dim);">Developed a predictive analytics model to forecast security breaches using machine learning. Designed a Django interface for data visualization and integrated MySQL for record management.</p>
-                <div class="tech-list">
-                    <span class="tech-pill">Python</span><span class="tech-pill">Django</span><span class="tech-pill">MySQL</span><span class="tech-pill">WAMP</span>
+            <div class="info-grid">
+                <div class="glass-card">
+                    <h2>Technical Stack</h2>
+                    <div class="skill-tag">AWS (EC2/S3)</div>
+                    <div class="skill-tag">Docker</div>
+                    <div class="skill-tag">Kubernetes</div>
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">Terraform</div>
+                    <div class="skill-tag">Linux Shell</div>
+                </div>
+                <div class="glass-card">
+                    <h2>Core Focus</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Automating CI/CD pipelines, securing cloud storage, and forecasting cyber threats through predictive modeling.</p>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="project-date">2023 | SECURITY</div>
-                <h3>Secure File Storage using Hybrid Cryptography</h3>
-                <p style="color: var(--text-dim);">Built a secure J2EE cloud storage system implementing AES, Blowfish, and RC6. Enhanced data privacy through steganography and multi-factor user authentication.</p>
-                <div class="tech-list">
-                    <span class="tech-pill">J2EE</span><span class="tech-pill">Cryptography</span><span class="tech-pill">AES</span><span class="tech-pill">Steganography</span>
+            <div class="glass-card">
+                <h2>Academic Projects</h2>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 5px;">Cyber Hacking Breach Prediction</h3>
+                    <p style="font-size: 0.9rem; margin-top: 0;">Developed ML models in Django to forecast security breaches with historical data analysis.</p>
+                </div>
+                <hr style="border: 0; border-top: 1px solid #e2e8f0;">
+                <div style="margin-top: 20px;">
+                    <h3 style="margin-bottom: 5px;">Hybrid Cryptography Cloud Storage</h3>
+                    <p style="font-size: 0.9rem; margin-top: 0;">Secured files using AES, Blowfish, and Steganography on a J2EE cloud framework.</p>
                 </div>
             </div>
-        </section>
 
-        <section>
-            <h2>Live Infrastructure (Database)</h2>
-            <div id="live-projects">
-                <p>Loading active projects...</p>
+            <div class="info-grid">
+                <div class="glass-card" style="border-left: 4px solid #10b981;">
+                    <h2>CI/CD Automation</h2>
+                    <p style="font-size: 0.85rem;">Mastering <strong>Jenkins</strong> for automated builds and testing workflows.</p>
+                </div>
+                <div class="glass-card" style="border-left: 4px solid #6366f1;">
+                    <h2>Infra as Code</h2>
+                    <p style="font-size: 0.85rem;">Utilizing <strong>Terraform</strong> to provision AWS resources as scalable code.</p>
+                </div>
             </div>
-        </section>
 
-        <section>
-            <h2>Education</h2>
-            <div class="edu-item">
-                <h3>B.Tech in Computer Science Engineering</h3>
-                <p>Annamacharya Institute of Technology and Sciences | 2019 – 2023</p>
-                <p style="color: var(--accent);">CGPA: 6.46/10</p>
+            <div class="glass-card">
+                <h2>Live Infrastructure Projects</h2>
+                <div id="db-projects">Connecting to Render database...</div>
             </div>
-            <div class="edu-item">
-                <h3>Intermediate (MPC)</h3>
-                <p>Vagdevi Junior College | 2017 – 2019</p>
-                <p style="color: var(--accent);">Percentage: 80%</p>
-            </div>
-        </section>
 
+        </main>
     </div>
 
     <script>
-        async function fetchLiveProjects() {
-            const list = document.getElementById('live-projects');
+        async function fetchLive() {
             try {
                 const res = await fetch('https://portfolio-backend-2vst.onrender.com/');
                 const data = await res.json();
-                list.innerHTML = data.projects.map(p => `
-                    <div class="project-card" style="border-left: 4px solid var(--accent);">
-                        <div class="project-date">Live Database Project</div>
-                        <h3>${p.title}</h3>
-                        <p style="color: var(--text-dim);">${p.description}</p>
-                        <div class="tech-list">
-                            ${p.tech_stack.split(',').map(t => `<span class="tech-pill">${t.trim()}</span>`).join('')}
-                        </div>
+                document.getElementById('db-projects').innerHTML = data.projects.map(p => `
+                    <div style="padding: 15px; background: rgba(255,255,255,0.5); border-radius: 12px; margin-bottom: 10px;">
+                        <h4 style="margin:0; color: var(--gold);">${p.title}</h4>
+                        <p style="font-size: 0.85rem; margin: 5px 0;">${p.description}</p>
                     </div>
                 `).join('');
             } catch (e) {
-                list.innerHTML = "<p>Backend currently sleeping. Refresh to retry.</p>";
+                document.getElementById('db-projects').innerHTML = "Backend offline.";
             }
         }
-        fetchLiveProjects();
+        fetchLive();
     </script>
 </body>
 </html>
