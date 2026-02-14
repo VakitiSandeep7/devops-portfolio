@@ -46,6 +46,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s ease;
         }
 
         /* Golden Glowing Ending */
@@ -62,26 +63,27 @@
         .sidebar { text-align: center; height: fit-content; position: sticky; top: 40px; }
         
         .photo-aura {
-            width: 170px;
-            height: 170px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 20px;
             border-radius: 50%;
             padding: 5px;
             background: linear-gradient(135deg, var(--gold), #f1e5ac);
             box-shadow: 0 0 25px var(--gold-glow);
+            overflow: hidden;
         }
 
         .photo-aura img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            object-fit: cover; /* Forces the photo to fill the circle */
+            object-fit: cover; /* This makes the image fit perfectly in the circle */
             object-position: center;
             border: 4px solid white;
             background: white;
         }
 
-        h1 { font-size: 2.2rem; margin: 10px 0; letter-spacing: -1px; }
+        h1 { font-size: 2.2rem; margin: 10px 0; letter-spacing: -1px; font-weight: 800; }
         .role-tag { color: var(--text-accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- CONTENT BLOCKS --- */
@@ -95,9 +97,10 @@
 
         /* Action Buttons */
         .btn-row { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-        .btn { text-decoration: none; padding: 10px 22px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; transition: 0.3s; }
-        .btn-gold { background: var(--gold); color: white; box-shadow: 0 4px 15px var(--gold-glow); }
-        .btn-outline { border: 1.5px solid #cbd5e1; color: #64748b; }
+        .btn { text-decoration: none; padding: 12px 22px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; transition: 0.3s; width: 100%; text-align: center;}
+        .btn-gold { background: var(--gold); color: white; box-shadow: 0 4px 15px var(--gold-glow); border: none; }
+        .btn-outline { border: 1.5px solid #cbd5e1; color: #64748b; background: white; }
+        .btn-resume { background: #3b82f6; color: white; border: none; margin-top: 5px; }
         .btn:hover { transform: translateY(-3px); opacity: 0.9; }
 
         @media (max-width: 950px) {
@@ -112,17 +115,19 @@
     <div class="main-container">
         <aside class="sidebar glass-card">
             <div class="photo-aura">
-                <img src="https://i.ibb.co/YJ6TH4g/1635841318532-1.jpg" alt="1635841318532-1" border="0">
+                <img src="https://i.ibb.co/v4S8L8x/1635841318532-1.jpg" alt="Sandeep Vakiti">
             </div>
             <div class="role-tag">DevOps & Cloud Engineer</div>
             <h1>Sandeep Vakiti</h1>
-            <p style="color: #64748b; font-size: 0.95rem;">B.Tech Computer Science Graduate | Infrastructure Architect</p>
+            <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 20px;">
+                B.Tech CSE Graduate | Specialized in AWS, Docker & Infrastructure Automation
+            </p>
             
             <div class="btn-row">
                 <a href="mailto:vakitisandeep9966@gmail.com" class="btn btn-gold">Email Me</a>
                 <a href="https://github.com/VakitiSandeep7" target="_blank" class="btn btn-outline">GitHub</a>
                 <a href="https://www.linkedin.com/in/sandeepvakiti" target="_blank" class="btn btn-outline">LinkedIn</a>
-                <a href="https://drive.google.com/file/d/1d9g7r3vt6B3sInAAdFliVmOGDXu8mtvO/view?usp=drive_link" class="btn btn-outline" style="width: 100%; margin-top: 5px; background: #3b82f6; color: white; border: none;">Download Resume</a>
+                <a href="https://drive.google.com/file/d/1d9g7r3vt6B3sInAAdFliVmOGDXu8mtvO/view?usp=drive_link" target="_blank" class="btn btn-resume">Download Full Resume</a>
             </div>
         </aside>
 
@@ -132,48 +137,69 @@
                 <div class="glass-card">
                     <h2>Technical Stack</h2>
                     <div class="tag-container">
-                        <span class="tag">AWS (EC2/S3)</span>
+                        <span class="tag">AWS (EC2/S3/IAM)</span>
                         <span class="tag">Docker</span>
                         <span class="tag">Kubernetes</span>
                         <span class="tag">Python</span>
                         <span class="tag">Terraform</span>
                         <span class="tag">Linux Shell</span>
-                        <span class="tag">Jenkins</span>
+                        <span class="tag">MySQL</span>
                     </div>
                 </div>
                 <div class="glass-card">
-                    <h2>Core Focus</h2>
-                    <p style="color: #64748b; font-size: 0.9rem;">Automating CI/CD pipelines, securing cloud storage, and forecasting cyber threats through predictive modeling and hybrid cryptography.</p>
+                    <h2>Professional Summary</h2>
+                    <p style="color: #64748b; font-size: 0.9rem; margin: 0;">
+                        Motivated B.Tech CSE graduate with a strong foundation in Python and web tech. 
+                        Upskilling in AWS and DevOps to build secure, automated CI/CD pipelines.
+                    </p>
                 </div>
             </div>
 
             <div class="glass-card">
                 <h2>Academic Projects</h2>
                 <div style="margin-bottom: 15px;">
-                    <h3 style="margin:0; font-size: 1.1rem;">Cyber Hacking Breach Prediction</h3>
-                    <p style="color: #64748b; font-size: 0.85rem; margin: 5px 0;">Developed ML models in Django to forecast security breaches with historical data analysis using stochastic processes.</p>
+                    <h3 style="margin:0; font-size: 1.1rem; color: #1e293b;">Cyber Hacking Breach Prediction</h3>
+                    <p style="color: #64748b; font-size: 0.85rem; margin: 8px 0;">
+                        Built a predictive model in Django to forecast security breaches using machine learning and stochastic processes.
+                    </p>
+                    <div class="tag-container">
+                        <span class="tag" style="font-size: 0.7rem;">Python</span>
+                        <span class="tag" style="font-size: 0.7rem;">Django</span>
+                        <span class="tag" style="font-size: 0.7rem;">MySQL</span>
+                    </div>
                 </div>
                 <div style="margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 15px;">
-                    <h3 style="margin:0; font-size: 1.1rem;">Hybrid Cryptography Cloud Storage</h3>
-                    <p style="color: #64748b; font-size: 0.85rem; margin: 5px 0;">Secured files using AES, Blowfish, and Steganography on a J2EE cloud framework for optimized security performance.</p>
+                    <h3 style="margin:0; font-size: 1.1rem; color: #1e293b;">Hybrid Cryptography Cloud Storage</h3>
+                    <p style="color: #64748b; font-size: 0.85rem; margin: 8px 0;">
+                        Implemented AES, Blowfish, and Steganography on J2EE for high-security cloud file management.
+                    </p>
+                    <div class="tag-container">
+                        <span class="tag" style="font-size: 0.7rem;">J2EE</span>
+                        <span class="tag" style="font-size: 0.7rem;">AES</span>
+                        <span class="tag" style="font-size: 0.7rem;">Blowfish</span>
+                    </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="glass-card" style="border-left: 5px solid #10b981;">
-                    <h2>CI/CD Automation</h2>
-                    <p style="color: #64748b; font-size: 0.85rem;">Mastering <strong>Jenkins</strong> for automated builds, testing, and multi-container deployment strategies.</p>
+                    <h2>CI/CD with Jenkins</h2>
+                    <p style="color: #64748b; font-size: 0.85rem; margin: 0;">
+                        Automating builds and testing workflows to ensure rapid and reliable software delivery.
+                    </p>
                 </div>
                 <div class="glass-card" style="border-left: 5px solid #6366f1;">
-                    <h2>Infra as Code</h2>
-                    <p style="color: #64748b; font-size: 0.85rem;">Utilizing <strong>Terraform</strong> to provision AWS resources and manage cloud infrastructure as scalable, version-controlled code.</p>
+                    <h2>IaC with Terraform</h2>
+                    <p style="color: #64748b; font-size: 0.85rem; margin: 0;">
+                        Provisioning and managing cloud resources using Infrastructure as Code for scalability.
+                    </p>
                 </div>
             </div>
 
             <div class="glass-card">
-                <h2>Live Infrastructure Projects</h2>
-                <div id="live-data" style="font-size: 0.9rem; color: #64748b;">
-                    Connecting to Render PostgreSQL database...
+                <h2>Live Infrastructure (From Database)</h2>
+                <div id="live-data-container" style="font-size: 0.9rem; color: #64748b;">
+                    Synchronizing with Render PostgreSQL...
                 </div>
             </div>
 
@@ -181,21 +207,31 @@
     </div>
 
     <script>
-        async function loadProjects() {
+        async function fetchLiveProjects() {
+            const container = document.getElementById('live-data-container');
             try {
-                const res = await fetch('https://portfolio-backend-2vst.onrender.com/');
-                const data = await res.json();
-                document.getElementById('live-data').innerHTML = data.projects.map(p => `
+                const response = await fetch('https://portfolio-backend-2vst.onrender.com/');
+                const data = await response.json();
+                
+                if (data.projects.length === 0) {
+                    container.innerHTML = "No live projects currently in database.";
+                    return;
+                }
+
+                container.innerHTML = data.projects.map(p => `
                     <div style="padding: 15px; background: rgba(255,255,255,0.4); border-radius: 15px; margin-bottom: 10px; border: 1px solid #e2e8f0;">
-                        <strong style="color: var(--gold); display: block;">${p.title}</strong>
-                        <span style="font-size: 0.8rem;">${p.description}</span>
+                        <strong style="color: var(--gold); display: block; margin-bottom: 5px;">${p.title}</strong>
+                        <p style="margin: 0; font-size: 0.85rem;">${p.description}</p>
+                        <div style="margin-top: 10px; font-weight: 800; font-size: 0.7rem; color: #3b82f6;">
+                            STACK: ${p.tech_stack.toUpperCase()}
+                        </div>
                     </div>
                 `).join('');
-            } catch (e) {
-                document.getElementById('live-data').innerHTML = "Backend offline. Check Render dashboard.";
+            } catch (err) {
+                container.innerHTML = "Backend is currently in sleep mode. Refresh to wake it up!";
             }
         }
-        loadProjects();
+        fetchLiveProjects();
     </script>
 </body>
 </html>
